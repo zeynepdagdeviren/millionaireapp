@@ -41,6 +41,7 @@ function App() {
     },
   ];
 
+  // En yüksekten en düşüğe doğru para listesi
   const moneyPyramid = useMemo(() =>
     [
       { id: 1, amount: "$ 100" },
@@ -58,7 +59,7 @@ function App() {
       { id: 13, amount: "$ 250000" },
       { id: 14, amount: "$ 500000" },
       { id: 15, amount: "$ 1000000" },
-    ].reverse(), []
+    ].reverse(), [] // sadece 1 kez oluşturulsun
   );
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function App() {
       const currentAmount = moneyPyramid.find((m) => m.id === questionNumber - 1)?.amount;
       setEarned(currentAmount);
     }
-  }, [moneyPyramid, questionNumber]);
+  }, [questionNumber]);
 
   return (
     <div className="app">
@@ -91,12 +92,13 @@ function App() {
           </>
         )}
       </div>
+
       <div className="pyramid">
         <ul className="moneyList">
           {moneyPyramid.map((m) => (
             <li
               key={m.id}
-              className={questionNumber === m.id ? "moneyListItem active" : "moneyListItem"}
+              className={`moneyListItem ${questionNumber === m.id ? "active" : ""}`}
             >
               <span className="moneyListItemNumber">{m.id}</span>
               <span className="moneyListItemAmount">{m.amount}</span>
@@ -109,3 +111,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
